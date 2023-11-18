@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import FluentWindow, SplashScreen
+from loguru import logger
 
 
 class MainWindow(FluentWindow):
@@ -17,10 +18,10 @@ class MainWindow(FluentWindow):
         # add items to navigation interface
         # self.initNavigation()
         self.splash_screen.finish()
+        logger.debug('init done')
 
     def init_window(self):
-        self.resize(960, 780)
-        self.setMinimumWidth(760)
+        self.setMinimumSize(960, 720)
         # self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
         self.setWindowTitle('PyQt-Fluent-Widgets')
 
@@ -34,5 +35,5 @@ class MainWindow(FluentWindow):
         desktop = QApplication.screens()[0].availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
-        self.show()
+        self.showMaximized()
         QApplication.processEvents()
