@@ -35,7 +35,7 @@ class MainWindow(FluentWindow):
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
         self.showMaximized()
 
-        # self.navigationInterface.setAcrylicEnabled(True)
+        self.navigationInterface.setAcrylicEnabled(True)
         self.navigationInterface.setReturnButtonVisible(False)
         self.navigationInterface.panel.toggle()
         logger.debug(self.navigationInterface.panel.displayMode)

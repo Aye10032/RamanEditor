@@ -2,7 +2,8 @@ import sys
 from enum import Enum
 
 from PyQt5.QtCore import QLocale
-from qfluentwidgets import ConfigSerializer, QConfig, ConfigItem, BoolValidator, qconfig, Theme
+from qfluentwidgets import ConfigSerializer, QConfig, ConfigItem, BoolValidator, qconfig, Theme, OptionsConfigItem, \
+    OptionsValidator
 
 
 class Language(Enum):
@@ -33,6 +34,10 @@ class Config(QConfig):
 
     # main window
     micaEnabled = ConfigItem("MainWindow", "MicaEnabled", is_win11(), BoolValidator())
+    dpiScale = OptionsConfigItem(
+        "MainWindow", "DpiScale", "Auto", OptionsValidator([1, 1.25, 1.5, 1.75, 2, "Auto"]), restart=True)
+    language = OptionsConfigItem(
+        "MainWindow", "Language", Language.AUTO, OptionsValidator(Language), LanguageSerializer(), restart=True)
 
 
 YEAR = 2023
