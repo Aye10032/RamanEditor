@@ -3,29 +3,23 @@ from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import FluentWindow, SplashScreen
 from loguru import logger
 
+from common.Config import cfg, VERSION
+
 
 class MainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
-        self.splash_screen: SplashScreen = None
         self.init_window()
 
-        # enable acrylic effect
-        self.navigationInterface.setAcrylicEnabled(True)
-
-        # self.connectSignalToSlot()
-
-        # add items to navigation interface
-        # self.initNavigation()
         self.splash_screen.finish()
         logger.debug('init done')
 
     def init_window(self):
-        self.setMinimumSize(960, 720)
+        self.setMinimumSize(1008, 800)
         # self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
-        self.setWindowTitle('PyQt-Fluent-Widgets')
+        self.setWindowTitle(f'RamanEditor {VERSION}')
 
-        # self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
+        self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
 
         # create splash screen
         self.splash_screen = SplashScreen(self.windowIcon(), self)
@@ -36,4 +30,10 @@ class MainWindow(FluentWindow):
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
         self.showMaximized()
+
+        # self.navigationInterface.setAcrylicEnabled(True)
+        self.navigationInterface.setReturnButtonVisible(False)
+        self.navigationInterface.panel.toggle()
+        logger.debug(self.navigationInterface.panel.displayMode)
+
         QApplication.processEvents()
