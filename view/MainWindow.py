@@ -1,9 +1,10 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QApplication
-from qfluentwidgets import FluentWindow, SplashScreen
+from qfluentwidgets import FluentWindow, SplashScreen, NavigationItemPosition, FluentIcon
 from loguru import logger
 
 from common.Config import cfg, VERSION
+from view.SettingInterface import SettingInterface
 
 
 class MainWindow(FluentWindow):
@@ -11,6 +12,9 @@ class MainWindow(FluentWindow):
         super().__init__()
         self.init_window()
 
+        self.settingInterface = SettingInterface(self)
+
+        self.init_navigation()
         self.splash_screen.finish()
         logger.debug('init done')
 
@@ -37,3 +41,7 @@ class MainWindow(FluentWindow):
         logger.debug(self.navigationInterface.panel.displayMode)
 
         QApplication.processEvents()
+
+    def init_navigation(self):
+        self.addSubInterface(
+            self.settingInterface, FluentIcon.SETTING, 'Settings', NavigationItemPosition.BOTTOM)
