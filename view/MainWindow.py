@@ -1,17 +1,19 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QApplication
-from qfluentwidgets import FluentWindow, SplashScreen, NavigationItemPosition, FluentIcon
+from qfluentwidgets import MSFluentWindow, SplashScreen, NavigationItemPosition, FluentIcon
 from loguru import logger
 
 from common.Config import cfg, VERSION
+from view.ProjectInterface import ProjectInterface
 from view.SettingInterface import SettingInterface
 
 
-class MainWindow(FluentWindow):
+class MainWindow(MSFluentWindow):
     def __init__(self):
         super().__init__()
         self.init_window()
 
+        self.projectInterface = ProjectInterface(self)
         self.settingInterface = SettingInterface(self)
 
         self.init_navigation()
@@ -23,7 +25,9 @@ class MainWindow(FluentWindow):
         # self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
         self.setWindowTitle(f'RamanEditor {VERSION}')
 
-        self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
+        # self.hBoxLayout.setContentsMargins(0, 20, 0, 28)
+
+        # self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
 
         # create splash screen
         self.splash_screen = SplashScreen(self.windowIcon(), self)
@@ -35,13 +39,14 @@ class MainWindow(FluentWindow):
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
         self.showMaximized()
 
-        self.navigationInterface.setAcrylicEnabled(True)
-        self.navigationInterface.setReturnButtonVisible(False)
-        self.navigationInterface.panel.toggle()
-        logger.debug(self.navigationInterface.panel.displayMode)
+        # self.navigationInterface.setAcrylicEnabled(True)
+        # self.navigationInterface.setReturnButtonVisible(False)
+        # self.navigationInterface.panel.toggle()
+        # logger.debug(self.navigationInterface.panel.displayMode)
 
         QApplication.processEvents()
 
     def init_navigation(self):
+        self.addSubInterface(self.projectInterface, FluentIcon.FOLDER, self.tr('Projects'))
         self.addSubInterface(
-            self.settingInterface, FluentIcon.SETTING, 'Settings', NavigationItemPosition.BOTTOM)
+            self.settingInterface, FluentIcon.SETTING, 'Settings', position=NavigationItemPosition.BOTTOM)

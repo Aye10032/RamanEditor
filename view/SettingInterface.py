@@ -1,7 +1,8 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtWidgets import QWidget
 from qfluentwidgets import ScrollArea, ExpandLayout, SettingCardGroup, SwitchSettingCard, OptionsSettingCard, \
     FluentIcon, CustomColorSettingCard, ComboBoxSettingCard
+from loguru import logger
 
 from common.Config import is_win11, cfg
 from common.StyleSheet import StyleSheet
@@ -12,15 +13,12 @@ class SettingInterface(ScrollArea):
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.scrollWidget = QWidget()
-        self.expandLayout = ExpandLayout(self.scrollWidget)
-
-        # setting label
-        self.settingLabel = QLabel(self.tr("Settings"), self)
+        self.scroll_widget = QWidget()
+        self.expandLayout = ExpandLayout(self.scroll_widget)
 
         # personalization
         self.personalGroup = SettingCardGroup(
-            self.tr('Personalization'), self.scrollWidget)
+            self.tr('Personalization'), self.scroll_widget)
         self.micaCard = SwitchSettingCard(
             FluentIcon.TRANSPARENT,
             self.tr('Mica effect'),
@@ -69,33 +67,34 @@ class SettingInterface(ScrollArea):
         self.init_widget()
 
     def init_widget(self):
-        self.resize(1000, 800)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.setViewportMargins(0, 80, 0, 20)
-        self.setWidget(self.scrollWidget)
+        self.setViewportMargins(0, 60, 0, 20)
+        self.setWidget(self.scroll_widget)
+        self.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         self.setWidgetResizable(True)
-        self.setObjectName('settingInterface')
-
-        # initialize style sheet
-        self.scrollWidget.setObjectName('scrollWidget')
-        self.settingLabel.setObjectName('settingLabel')
-        StyleSheet.SETTING_INTERFACE.apply(self)
 
         self.micaCard.setEnabled(is_win11())
 
+        self.scroll_widget.setMaximumWidth(1000)
+
+        self.expandLayout.setSpacing(28)
+        self.expandLayout.setContentsMargins(36, 0, 36, 10)
+
         self.init_layout()
+        self.init_qss()
 
     def init_layout(self):
-        self.settingLabel.move(36, 30)
-
-        # add cards to group
         self.personalGroup.addSettingCard(self.micaCard)
         self.personalGroup.addSettingCard(self.themeCard)
         self.personalGroup.addSettingCard(self.themeColorCard)
         self.personalGroup.addSettingCard(self.zoomCard)
         self.personalGroup.addSettingCard(self.languageCard)
 
-        # add setting card group to layout
-        self.expandLayout.setSpacing(28)
-        self.expandLayout.setContentsMargins(36, 10, 36, 0)
         self.expandLayout.addWidget(self.personalGroup)
+
+    def init_qss(self):
+        self.setObjectName('SettingInterface')
+
+        self.scroll_widget.setObjectName('ScrollWidget')
+
+        StyleSheet.SCROLL.apply(self)
