@@ -52,6 +52,7 @@ class ProjectInterface(QWidget):
         self.scroll_area.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         self.scroll_widget.setLayout(self.scroll_layout)
         self.scroll_widget.setMaximumWidth(1000)
+        self.scroll_layout.setContentsMargins(30, 0, 30, 10)
 
         self.init_layout()
         self.set_qss()
@@ -66,7 +67,7 @@ class ProjectInterface(QWidget):
 
         for i in range(14):
             self.project_group.add_card(
-                ProjectCard(f'Project {i}', 'C:/Users/DELL/Desktop/Project 1', self.project_group))
+                ProjectCard(f'Project {i}', 'C:/Users/DELL/Desktop/Project 1', 1, self.project_group))
         self.scroll_layout.addWidget(self.project_group)
         self.base_layout.addWidget(self.scroll_area)
 

@@ -6,11 +6,15 @@ from qfluentwidgets import CardWidget, RoundMenu, Action, FluentIcon, IconWidget
     TransparentToolButton, ExpandLayout, FluentStyleSheet, setFont
 
 from common.MyFluentIcon import LetterIcon
+from loguru import logger
 
 
 class ProjectCard(CardWidget):
-    def __init__(self, title, content, parent=None):
+    def __init__(self, title, content, index, parent=None):
         super().__init__(parent)
+        self.content = content
+        self.index = index
+
         self.iconWidget = IconWidget(LetterIcon.A, self)
         self.titleLabel = BodyLabel(title, self)
         self.contentLabel = CaptionLabel(content, self)
@@ -42,13 +46,16 @@ class ProjectCard(CardWidget):
 
     def on_more_button_clicked(self):
         menu = RoundMenu(parent=self)
-        menu.addAction(Action(FluentIcon.SHARE, '共享', self))
-        menu.addAction(Action(FluentIcon.CHAT, '写评论', self))
-        menu.addAction(Action(FluentIcon.PIN, '固定到任务栏', self))
+        menu.addAction(Action(FluentIcon.FOLDER, self.tr('Open in explorer'), self))
+        menu.addAction(Action(FluentIcon.EDIT, self.tr('Rename'), self))
+        menu.addAction(Action(FluentIcon.DELETE, self.tr('Remove'), self, triggered=self.remove_card))
 
         x = (self.moreButton.width() - menu.width()) // 2 + 10
         pos = self.moreButton.mapToGlobal(QPoint(x, self.moreButton.height()))
         menu.exec(pos)
+
+    def remove_card(self):
+        logger.debug(self.content)
 
 
 class ProjectGroup(QWidget):

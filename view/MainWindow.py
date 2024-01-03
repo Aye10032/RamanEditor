@@ -21,7 +21,7 @@ class MainWindow(MSFluentWindow):
         logger.debug('init done')
 
     def init_window(self):
-        self.setMinimumSize(1008, 800)
+        self.setMinimumSize(1080, 720)
         # self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
         self.setWindowTitle(f'RamanEditor {VERSION}')
 
@@ -37,7 +37,7 @@ class MainWindow(MSFluentWindow):
         desktop = QApplication.screens()[0].availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
-        self.showMaximized()
+        # self.showMaximized()
 
         # self.navigationInterface.setAcrylicEnabled(True)
         # self.navigationInterface.setReturnButtonVisible(False)

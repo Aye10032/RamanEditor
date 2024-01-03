@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
 from qfluentwidgets import ScrollArea, ExpandLayout, SettingCardGroup, SwitchSettingCard, OptionsSettingCard, \
-    FluentIcon, CustomColorSettingCard, ComboBoxSettingCard
+    FluentIcon, CustomColorSettingCard, ComboBoxSettingCard, setTheme, setThemeColor
 from loguru import logger
 
 from common.Config import is_win11, cfg
@@ -82,6 +82,7 @@ class SettingInterface(ScrollArea):
 
         self.init_layout()
         self.init_qss()
+        self.connect_signals()
 
     def init_layout(self):
         self.personalGroup.addSettingCard(self.micaCard)
@@ -98,3 +99,7 @@ class SettingInterface(ScrollArea):
         self.scroll_widget.setObjectName('ScrollWidget')
 
         StyleSheet.SCROLL.apply(self)
+
+    def connect_signals(self):
+        self.themeCard.optionChanged.connect(lambda ci: setTheme(cfg.get(ci)))
+        self.themeColorCard.colorChanged.connect(setThemeColor)

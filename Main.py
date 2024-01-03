@@ -22,6 +22,9 @@ QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
 
 logger.add('log/run_time.log')
 
+if not os.path.exists('./data'):
+    os.mkdir('./data')
+
 app = QApplication(sys.argv)
 app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
 
