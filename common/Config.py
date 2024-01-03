@@ -25,15 +25,10 @@ class LanguageSerializer(ConfigSerializer):
         return Language(QLocale(value)) if value != 'Auto' else Language.AUTO
 
 
-def is_win11():
-    return sys.platform == 'win32' and sys.getwindowsversion().build >= 22000
-
-
 class Config(QConfig):
     """ Configuration """
 
     # main window
-    micaEnabled = ConfigItem("MainWindow", "MicaEnabled", is_win11(), BoolValidator())
     dpiScale = OptionsConfigItem(
         "MainWindow", "DpiScale", "Auto", OptionsValidator([1, 1.25, 1.5, 1.75, 2, "Auto"]), restart=True)
     language = OptionsConfigItem(
