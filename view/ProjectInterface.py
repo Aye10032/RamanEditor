@@ -28,22 +28,15 @@ class ProjectInterface(QWidget):
 
         self.project_group = ProjectGroup(self.scroll_widget)
 
-        # self.pj1 = ProjectCard('Project 1', 'C:/Users/DELL/Desktop/Project 1', self.project_group)
-
         self.init_widget()
 
     def init_widget(self):
-        # self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        # self.setViewportMargins(0, 10, 0, 20)
         self.setLayout(self.base_layout)
-        # self.setAlignment(Qt.AlignHCenter)
-        # self.setWidgetResizable(True)
-
-        # self.base_layout.setContentsMargins(30, 0, 30, 0)
         self.base_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
         self.top_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.top_widget.setMinimumHeight(60)
+        self.top_widget.setMinimumHeight(100)
+        self.top_layout.setContentsMargins(25, 10, 25, 40)
 
         self.new_button.installEventFilter(ToolTipFilter(self.new_button))
         self.new_button.setToolTip(self.tr('create new project'))
