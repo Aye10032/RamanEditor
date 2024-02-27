@@ -9,6 +9,7 @@ class StyleSheet(StyleSheetBase, Enum):
     """ Style sheet  """
 
     SCROLL = 'scroll_interface'
+    NODE = 'node_editor_interface'
 
     def path(self, theme=Theme.AUTO):
         theme = qconfig.theme if theme == Theme.AUTO else theme

@@ -1,0 +1,11 @@
+NodeEditorInterface,NodeGraphicsScene,QGraphicsView{
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    background-color: transparent;
+}
+
+QGraphicsView {
+    background-color: transparent;
+    border: none;
+}
