@@ -11,8 +11,10 @@ class NodeGraphicsScene(QGraphicsScene):
 
         self.grid_seize = 20
 
-        self.pen = QPen(QColor('#2f2f2f'))
-        self.pen.setWidth(1)
+        self.pen_light = QPen(QColor('#303030'))
+        self.pen_light.setWidth(1)
+        self.pen_dark = QPen(QColor('#292929'))
+        self.pen_dark.setWidth(1)
 
         self.width, self.height = 64000, 64000
         self.setSceneRect(self.width / 2, self.height / 2, self.width, self.height)
@@ -30,13 +32,16 @@ class NodeGraphicsScene(QGraphicsScene):
         first_left = left - (left % self.grid_seize)
         first_top = top - (top % self.grid_seize)
 
-        lines = []
+        lines_light = []
+        lines_dark = []
         for x in range(first_left, right, self.grid_seize):
-            lines.append(QLine(x, top, x, bottom))
+            lines_light.append(QLine(x, top, x, bottom)) if x % 100 != 0 else lines_dark.append(QLine(x, top, x, bottom))
 
         for y in range(first_top, bottom, self.grid_seize):
-            lines.append(QLine(left, y, right, y))
+            lines_light.append(QLine(left, y, right, y)) if y % 100 != 0 else lines_dark.append(QLine(left, y, right, y))
 
-        painter.setPen(self.pen)
-        painter.drawLines(lines)
+        painter.setPen(self.pen_light)
+        painter.drawLines(lines_light)
 
+        painter.setPen(self.pen_dark)
+        painter.drawLines(lines_dark)
