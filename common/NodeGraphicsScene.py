@@ -10,6 +10,7 @@ class NodeGraphicsScene(QGraphicsScene):
         super().__init__(parent=parent)
 
         self.grid_seize = 20
+        self.grid_count = 5
 
         self.pen_light = QPen(QColor('#303030'))
         self.pen_light.setWidth(1)
@@ -35,10 +36,12 @@ class NodeGraphicsScene(QGraphicsScene):
         lines_light = []
         lines_dark = []
         for x in range(first_left, right, self.grid_seize):
-            lines_light.append(QLine(x, top, x, bottom)) if x % 100 != 0 else lines_dark.append(QLine(x, top, x, bottom))
+            lines_light.append(QLine(x, top, x, bottom)) if x % (self.grid_count * self.grid_seize) != 0 \
+                else lines_dark.append(QLine(x, top, x, bottom))
 
         for y in range(first_top, bottom, self.grid_seize):
-            lines_light.append(QLine(left, y, right, y)) if y % 100 != 0 else lines_dark.append(QLine(left, y, right, y))
+            lines_light.append(QLine(left, y, right, y)) if y % (self.grid_count * self.grid_seize) != 0 \
+                else lines_dark.append(QLine(left, y, right, y))
 
         painter.setPen(self.pen_light)
         painter.drawLines(lines_light)
