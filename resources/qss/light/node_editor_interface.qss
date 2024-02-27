@@ -9,8 +9,6 @@ QGraphicsView {
     background-color: transparent;
 }
 
-QWidget#BaseWidget {
-    border-right: none;
-    border-bottom: none;
-    border-top-left-radius: 10px;
+QAbstractScrollArea {
+    border: none;
 }
