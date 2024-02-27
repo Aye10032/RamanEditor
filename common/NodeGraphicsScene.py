@@ -39,3 +39,4 @@ class NodeGraphicsScene(QGraphicsScene):
 
         painter.setPen(self.pen)
         painter.drawLines(lines)
+

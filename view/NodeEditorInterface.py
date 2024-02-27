@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGraphicsView
 
 from common.NodeGraphicsScene import NodeGraphicsScene
+from common.StyleSheet import StyleSheet
 
 
 class NodeEditorInterface(QWidget):
@@ -9,7 +10,7 @@ class NodeEditorInterface(QWidget):
 
         self.layout = QVBoxLayout()
         self.view = QGraphicsView(self)
-        self.scene = NodeGraphicsScene()
+        self.scene = NodeGraphicsScene(self)
 
         self.init_widget()
 
@@ -18,9 +19,11 @@ class NodeEditorInterface(QWidget):
         self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.view.setScene(self.scene)
+
         self.layout.addWidget(self.view)
 
         self.set_qss()
 
     def set_qss(self):
         self.setObjectName('NodeEditorInterface')
+        StyleSheet.NODE.apply(self)

@@ -1,11 +1,16 @@
-NodeEditorInterface,NodeGraphicsScene,QGraphicsView{
+NodeEditorInterface {
+    background-color: transparent;
+}
+
+QGraphicsView {
     border-right: none;
     border-bottom: none;
     border-top-left-radius: 10px;
     background-color: transparent;
 }
 
-QGraphicsView {
-    background-color: transparent;
-    border: none;
+QWidget#BaseWidget {
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 10px;
 }
