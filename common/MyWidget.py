@@ -1,9 +1,9 @@
 from typing import List
 
-from PyQt5.QtCore import QPoint, Qt
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget
+from PyQt5.QtCore import QPoint, Qt, pyqtSignal, QUrl
+from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QLabel, QFileDialog
 from qfluentwidgets import CardWidget, RoundMenu, Action, FluentIcon, IconWidget, BodyLabel, CaptionLabel, \
-    TransparentToolButton, ExpandLayout, FluentStyleSheet, setFont
+    TransparentToolButton, ExpandLayout, FluentStyleSheet, setFont, MessageBoxBase, SubtitleLabel, LineEdit, ToolButton
 
 from common.MyFluentIcon import LetterIcon
 from loguru import logger
@@ -88,3 +88,49 @@ class ProjectGroup(QWidget):
     def adjustSize(self):
         h = self.cardLayout.heightForWidth(self.width()) + 46
         return self.resize(self.width(), h)
+
+
+class ProjectDialog(MessageBoxBase):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.titleLabel = SubtitleLabel(self.tr('New Project'), self)
+
+        self.name_input = LineEdit(self)
+        self.name_input.setPlaceholderText(self.tr('Project Name'))
+
+        self.path_widget = QWidget(self)
+        self.path_layout = QHBoxLayout(self.path_widget)
+        self.path_input = LineEdit(self.path_widget)
+        self.path_btn = ToolButton(FluentIcon.FOLDER, self.path_widget)
+        self.path_layout.addWidget(self.path_input)
+        self.path_layout.addWidget(self.path_btn)
+        self.path_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.path_input.setPlaceholderText(self.tr('Project Location'))
+        self.path_input.setClearButtonEnabled(True)
+
+        # add widget to view layout
+        self.viewLayout.setAlignment(Qt.AlignHCenter)
+        self.viewLayout.addWidget(self.titleLabel)
+        self.viewLayout.addWidget(self.name_input)
+        self.viewLayout.addWidget(self.path_widget)
+        self.viewLayout.addStretch(1)
+
+        # change the text of button
+        self.yesButton.setText(self.tr('Finish'))
+        self.cancelButton.setText(self.tr('Cancel'))
+
+        self.widget.setMinimumSize(600, 400)
+        self.yesButton.setDisabled(True)
+        self.path_input.textChanged.connect(self.validate_url)
+        self.path_btn.clicked.connect(self.select_path)
+
+        # self.hideYesButton()
+
+    def validate_url(self, text):
+        self.yesButton.setEnabled(QUrl(text).isValid())
+
+    def select_path(self):
+        folder = QFileDialog.getExistingDirectory(self, "选择文件夹", "")
+        self.path_input.setText(folder)

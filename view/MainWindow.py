@@ -21,13 +21,13 @@ class MainWindow(MSFluentWindow):
         logger.debug('init done')
 
     def init_window(self):
-        self.setMinimumSize(1080, 720)
+        self.resize(1080, 720)
         # self.setWindowIcon(QIcon(':/gallery/images/logo.png'))
         self.setWindowTitle(f'RamanEditor {VERSION}')
 
         # self.hBoxLayout.setContentsMargins(0, 20, 0, 28)
 
-        # self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
+        self.setMicaEffectEnabled(cfg.get(cfg.micaEnabled))
 
         # create splash screen
         self.splash_screen = SplashScreen(self.windowIcon(), self)
@@ -37,12 +37,6 @@ class MainWindow(MSFluentWindow):
         desktop = QApplication.screens()[0].availableGeometry()
         w, h = desktop.width(), desktop.height()
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
-        # self.showMaximized()
-
-        # self.navigationInterface.setAcrylicEnabled(True)
-        # self.navigationInterface.setReturnButtonVisible(False)
-        # self.navigationInterface.panel.toggle()
-        # logger.debug(self.navigationInterface.panel.displayMode)
 
         QApplication.processEvents()
 
