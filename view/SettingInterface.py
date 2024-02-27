@@ -19,6 +19,13 @@ class SettingInterface(ScrollArea):
         # personalization
         self.personalGroup = SettingCardGroup(
             self.tr('Personalization'), self.scroll_widget)
+        self.micaCard = SwitchSettingCard(
+            FluentIcon.TRANSPARENT,
+            self.tr('Mica effect'),
+            self.tr('Apply semi transparent to windows and surfaces'),
+            cfg.micaEnabled,
+            self.personalGroup
+        )
         self.themeCard = OptionsSettingCard(
             cfg.themeMode,
             FluentIcon.BRUSH,
@@ -76,6 +83,7 @@ class SettingInterface(ScrollArea):
         self.connect_signals()
 
     def init_layout(self):
+        self.personalGroup.addSettingCard(self.micaCard)
         self.personalGroup.addSettingCard(self.themeCard)
         self.personalGroup.addSettingCard(self.themeColorCard)
         self.personalGroup.addSettingCard(self.zoomCard)

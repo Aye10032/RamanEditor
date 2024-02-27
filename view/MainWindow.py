@@ -4,6 +4,7 @@ from qfluentwidgets import MSFluentWindow, SplashScreen, NavigationItemPosition,
 from loguru import logger
 
 from common.Config import cfg, VERSION
+from view.NodeEditorInterface import NodeEditorInterface
 from view.ProjectInterface import ProjectInterface
 from view.SettingInterface import SettingInterface
 
@@ -15,6 +16,7 @@ class MainWindow(MSFluentWindow):
 
         self.projectInterface = ProjectInterface(self)
         self.settingInterface = SettingInterface(self)
+        self.node_editor_interface = NodeEditorInterface(self)
 
         self.init_navigation()
         self.splash_screen.finish()
@@ -42,5 +44,6 @@ class MainWindow(MSFluentWindow):
 
     def init_navigation(self):
         self.addSubInterface(self.projectInterface, FluentIcon.FOLDER, self.tr('Projects'))
+        self.addSubInterface(self.node_editor_interface, FluentIcon.EDIT, self.tr('Node Editor'))
         self.addSubInterface(
             self.settingInterface, FluentIcon.SETTING, 'Settings', position=NavigationItemPosition.BOTTOM)
