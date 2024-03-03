@@ -1,2 +1,2 @@
-pyqt5~=5.15.10
+PyQt-Fluent-Widgets
 loguru~=0.7.2
