@@ -6,9 +6,5 @@ QGraphicsView {
     border-right: none;
     border-bottom: none;
     border-top-left-radius: 10px;
-    background-color: transparent;
-}
-
-QAbstractScrollArea {
-    border: none;
+    background-color: rgba(255,0,0,50);
 }
