@@ -1,7 +1,7 @@
 import sys
 from enum import Enum
 
-from PyQt5.QtCore import QLocale
+from PySide6.QtCore import QLocale
 from qfluentwidgets import ConfigSerializer, QConfig, ConfigItem, BoolValidator, qconfig, Theme, OptionsConfigItem, \
     OptionsValidator
 

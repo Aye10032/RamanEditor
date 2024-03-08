@@ -1,7 +1,7 @@
 from typing import List
 
-from PyQt5.QtCore import QPoint, Qt, pyqtSignal, QUrl
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QLabel, QFileDialog
+from PySide6.QtCore import QPoint, Qt, QUrl
+from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QLabel, QFileDialog
 from qfluentwidgets import CardWidget, RoundMenu, Action, FluentIcon, IconWidget, BodyLabel, CaptionLabel, \
     TransparentToolButton, ExpandLayout, FluentStyleSheet, setFont, MessageBoxBase, SubtitleLabel, LineEdit, ToolButton
 

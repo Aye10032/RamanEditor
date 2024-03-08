@@ -1,5 +1,5 @@
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QApplication
+from PySide6.QtCore import QSize
+from PySide6.QtWidgets import QApplication
 from qfluentwidgets import MSFluentWindow, SplashScreen, NavigationItemPosition, FluentIcon
 from loguru import logger
 

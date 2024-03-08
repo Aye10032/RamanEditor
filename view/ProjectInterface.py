@@ -1,8 +1,8 @@
 import json
 import os
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QLabel, QFrame, QSplitter, QHBoxLayout, QVBoxLayout
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QLabel, QFrame, QSplitter, QHBoxLayout, QVBoxLayout
 from qfluentwidgets import ScrollArea, ExpandLayout, SearchLineEdit, PushButton, ToolButton, ToolTipFilter, FluentIcon, \
     SmoothScrollArea
 

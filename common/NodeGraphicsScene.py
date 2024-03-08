@@ -1,8 +1,8 @@
 import math
 
-from PyQt5.QtCore import QLine
-from PyQt5.QtGui import QColor, QPen
-from PyQt5.QtWidgets import QGraphicsScene
+from PySide6.QtCore import QLine
+from PySide6.QtGui import QColor, QPen, QPainterPath
+from PySide6.QtWidgets import QGraphicsScene
 
 
 class NodeGraphicsScene(QGraphicsScene):
@@ -20,10 +20,19 @@ class NodeGraphicsScene(QGraphicsScene):
         self.width, self.height = 64000, 64000
         self.setSceneRect(self.width / 2, self.height / 2, self.width, self.height)
 
-        self.setBackgroundBrush(QColor('#393939'))
+        # self.setBackgroundBrush(QColor('#393939'))
 
     def drawBackground(self, painter, rect):
-        super().drawBackground(painter, rect)
+        # super().drawBackground(painter, rect)
+
+        # 窗口圆角
+        view_rect = self.views()[0].rect()
+        view_rect.moveTo(int(rect.topLeft().x()), int(rect.topLeft().y()))
+        path = QPainterPath()
+        path.addRoundedRect(view_rect, 10, 10)
+
+        # 裁切
+        painter.setClipPath(path)
 
         left = int(math.floor(rect.left()))
         right = int(math.ceil(rect.right()))
@@ -48,3 +57,5 @@ class NodeGraphicsScene(QGraphicsScene):
 
         painter.setPen(self.pen_dark)
         painter.drawLines(lines_dark)
+
+        painter.setClipping(False)
