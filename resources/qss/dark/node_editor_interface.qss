@@ -1,0 +1,8 @@
+NodeEditorInterface {
+    background-color: transparent;
+}
+
+QGraphicsView {
+    border-radius: 10px;
+    background-color: #393939;
+}

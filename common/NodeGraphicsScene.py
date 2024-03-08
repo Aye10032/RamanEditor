@@ -20,11 +20,7 @@ class NodeGraphicsScene(QGraphicsScene):
         self.width, self.height = 64000, 64000
         self.setSceneRect(self.width / 2, self.height / 2, self.width, self.height)
 
-        # self.setBackgroundBrush(QColor('#393939'))
-
     def drawBackground(self, painter, rect):
-        # super().drawBackground(painter, rect)
-
         # 窗口圆角
         view_rect = self.views()[0].rect()
         view_rect.moveTo(int(rect.topLeft().x()), int(rect.topLeft().y()))

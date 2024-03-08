@@ -4,5 +4,5 @@ NodeEditorInterface {
 
 QGraphicsView {
     border-radius: 10px;
-    background-color: rgba(255,0,0,50);
+    background-color: #393939;
 }
